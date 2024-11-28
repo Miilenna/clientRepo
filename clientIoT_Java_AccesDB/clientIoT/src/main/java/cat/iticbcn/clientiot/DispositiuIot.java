@@ -17,7 +17,7 @@ import com.amazonaws.services.iot.client.sample.sampleUtil.SampleUtil.KeyStorePa
 public class DispositiuIot{
 
     //private static final String FICH_CLAU_PUBLICA = "./client1certs/";
-    private static final String FICH_CLAU_PRIVADA = "C:/Users/Milena Vardumyan/Desktop/clientIoT_Java_AccesDB/clientIoT/client1certsclient1-private.pem.key";
+    private static final String FICH_CLAU_PRIVADA = "C:/Users/Milena Vardumyan/Desktop/MavenProjectes/clientRepo/clientIoT_Java_AccesDB/clientIoT/client1certsclient1/certsclient1-private.pem.key";
     private static final String FICH_CERT_DISP_IOT = "C:/Users/Milena Vardumyan/Desktop/clientIoT_Java_AccesDB/clientIoT/client1-certificate.pem.crt";
     private static final String ENDPOINT = "a2lo7xb2znc79y-ats.iot.us-east-1.amazonaws.com";
     //public static final String TOPIC = "iticbcn/espnode01/pub";
