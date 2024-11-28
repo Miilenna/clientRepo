@@ -12,7 +12,7 @@ import java.sql.*;
  */
 public class ClientIoT {
 
-    static final String url = "jdbc:mysql://85b0-158-180-16-205.ngrok-free.app/users"; 
+    static final String url = "jdbc:mysql://85b0-158-180-16-205.ngrok-free.app"; 
     static final String usuario = "adminUser"; 
     static final String contrasena = "password"; 
 
