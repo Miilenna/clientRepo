@@ -16,13 +16,13 @@ import com.amazonaws.services.iot.client.sample.sampleUtil.SampleUtil.KeyStorePa
 
 public class DispositiuIot{
 
-    //private static final String FICH_CLAU_PUBLICA = "./client1certs/";
-    private static final String FICH_CLAU_PRIVADA = "client1certs/client1-private.pem.key";
-    private static final String FICH_CERT_DISP_IOT = "client1certs/client1-certificate.pem.crt";
-    private static final String ENDPOINT = "a2lo7xb2znc79y-ats.iot.us-east-1.amazonaws.com";
+    //private static final String FICH_CLAU_PUBLICA = "clientIoT/client1certs/client1-public.pem.key";
+    private static final String FICH_CLAU_PRIVADA = "clientIoT/client1certs/client1-private.pem.key";
+    private static final String FICH_CERT_DISP_IOT = "clientIoT/client1certs/client1-certificate.pem.crt";
+    private static final String ENDPOINT = "a1lvpmj77nw97y-ats.iot.us-east-1.amazonaws.com";
     //public static final String TOPIC = "iticbcn/espnode01/pub";
-    public static final String TOPIC = "iticbcn/#";
-    public static final String CLIENT_ID = "client1";
+    public static final String TOPIC = "esp32/pub";
+    public static final String CLIENT_ID = "esp32/pub";
     public static final AWSIotQos TOPIC_QOS = AWSIotQos.QOS0;
 
     private static AWSIotMqttClient awsIotClient;
@@ -44,10 +44,34 @@ public class DispositiuIot{
             KeyStorePasswordPair pair = SampleUtil.getKeyStorePasswordPair(certFile, pKFile, algorithm);
 
             awsIotClient = new AWSIotMqttClient(cliEP, cliId, pair.keyStore, pair.keyPassword);
+            awsIotClient.setKeepAliveInterval(60); 
+
+            try {
+                awsIotClient.connect();
+            } catch (AWSIotException e) {
+                e.printStackTrace();
+                reconnect();
+            }
+        
         }
 
         if (awsIotClient == null) {
             throw new IllegalArgumentException("Error als construir client amb el certificat o les credencials.");
+        }
+    }
+    private static void reconnect() {
+        while (true) {
+            try {
+                awsIotClient.connect();
+                break;
+            } catch (AWSIotException e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(5000); // Wait for 5 seconds before retrying
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
+            }
         }
     }
 

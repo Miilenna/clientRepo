@@ -12,9 +12,9 @@ import java.sql.*;
  */
 public class ClientIoT {
 
-    static final String url = "jdbc:mysql://85b0-158-180-16-205.ngrok-free.app"; 
-    static final String usuario = "adminUser"; 
-    static final String contrasena = "password"; 
+    static final String URL = "jdbc:mysql://127.0.0.1:8888/DDBBPROJ";
+    static final String usuario = "root"; 
+    static final String contrasena = "1234"; 
 
     public static void main(String[] args) {
 
@@ -25,7 +25,7 @@ public class ClientIoT {
             disp.conecta();
             disp.subscriu(); 
 
-            try (Connection con = ConnectDB.getConnection(url, usuario, contrasena)) {
+            try (Connection con = ConnectDB.getConnection(URL, usuario, contrasena)) {
                 AccesMethodsToDB access = new AccesMethodsToDB();
                 access.selectAlumnes(con);
                 access.insertRegistry(con, null);
